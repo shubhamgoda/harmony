@@ -11,10 +11,6 @@ const navData: NavLink[] = [
     name: "Home",
     path: "/",
   },
-  {
-    name: "BRB Clicker",
-    path: "/game",
-  },
 ]
 
 const Navbar = () => (
