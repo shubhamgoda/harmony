@@ -12,12 +12,14 @@ let languages = ['English', 'Hindi', 'German', 'Telugu', 'Tamil']
 const LanguagesGenres = () => (
   <div>
     <Layout title="Languages and Genres">
-      <h1>Languages & Genres</h1>
-      {
-        languages.map((l, i) => {
-          return <LanguageCard language={l} key={l}></LanguageCard>
-        })
-      }
+      <h1 style={{ textAlign: "center" }}>Languages & Genres</h1>
+      <div style={{ textAlign: "center" }}>
+        {
+          languages.map((l, i) => {
+            return <LanguageCard language={l} key={l}></LanguageCard>
+          })
+        }
+      </div>
     </Layout>
   </div>
   // <div>
