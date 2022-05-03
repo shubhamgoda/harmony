@@ -4,7 +4,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 
 type Props = {
-  children?: ReactNode
+  children?: ReactNode | ReactNode[]
   title: string
 }
 
