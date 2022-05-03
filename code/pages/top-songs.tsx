@@ -3,7 +3,13 @@ import Layout from "../components/layout/Layout"
 const TopSongs = () => (
   <Layout title="Top Songs">
     <h1 style={{ textAlign: "center" }}>Top Songs</h1>
-    <p style={{ textAlign: "center" }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    <h2 style={{ textAlign: "center" }}>Here are your most played songs:</h2>
+
+    <p style={{ textAlign: "center" }}> Smoking Out The Window - Bruno Mars</p>
+    <p style={{ textAlign: "center" }}> Tum Hi Ho - Arijit Singh</p>
+    <p style={{ textAlign: "center" }}> Despacito - Luis Fonsi, Daddy Yankee</p>
+    <p style={{ textAlign: "center" }}> Tujhe Dekha To - Kumar Sanu, Lata Mangeshkar</p>
+    <p style={{ textAlign: "center" }}> pushin P - Gunna</p>
   </Layout>
 )
 
