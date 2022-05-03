@@ -1,16 +1,13 @@
-import Layout from "../components/layout/Layout"
 import { Heading, Text } from "@chakra-ui/react"
+import Layout from "../components/layout/Layout"
 
 const IndexPage = () => (
   <Layout title="Home">
     <Heading my="4">
-      My Trends A4 Project
+      Harmony
     </Heading>
     <Text fontSize="md" my="3">
-      I am busy so I made an app to keep track of my tasks.
-    </Text>
-    <Text fontSize="md" my="3">
-      I worked on this assignment for 2 hours.
+      The #1 source for all your favorite music
     </Text>
   </Layout>
 )

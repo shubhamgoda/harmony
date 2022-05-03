@@ -11,6 +11,14 @@ const navData: NavLink[] = [
     name: "Home",
     path: "/",
   },
+  {
+    name: "Top Songs",
+    path: "/top-songs",
+  },
+  {
+    name: "Languages & Genres",
+    path: "/languages-genres",
+  },
 ]
 
 const Navbar = () => (
