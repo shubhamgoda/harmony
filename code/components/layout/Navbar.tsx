@@ -1,12 +1,15 @@
 import React from "react"
 import Link from "next/link"
+import NextLink from "next/link"
+import { Button, Box, HStack } from "@chakra-ui/react"
+import { useRouter } from "next/router"
 
-type NavLink = {
+type NavLinkData = {
   name: string
   path: string
 }
 
-const navData: NavLink[] = [
+const navData: NavLinkData[] = [
   {
     name: "Home",
     path: "/",
@@ -37,3 +40,6 @@ const Navbar = () => (
 )
 
 export default Navbar
+
+
+

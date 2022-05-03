@@ -3,12 +3,8 @@ import Layout from "../components/layout/Layout"
 
 const IndexPage = () => (
   <Layout title="Home">
-    <Heading my="4">
-      Harmony
-    </Heading>
-    <Text fontSize="md" my="3">
-      The #1 source for all your favorite music
-    </Text>
+    <h1 style={{ textAlign: "center" }}>Harmony</h1>
+    <p style={{ textAlign: "center" }}>The #1 source for all your favorite music</p>
   </Layout>
 )
 
