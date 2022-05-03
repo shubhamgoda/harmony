@@ -10,14 +10,34 @@ type Song = {
 const songData: Song[] = [
   {
     name: "Smoking Out The Window",
-    time: "3:00 minutes",
+    time: "3:00 mins",
     artist: "Bruno Mars"
+  },
+  {
+    name: "Tum Hi Ho",
+    time: "3:00 mins",
+    artist: "Arijit Singh"
+  },
+  {
+    name: "Despacito",
+    time: "3:00 mins",
+    artist: "Luis Fonsi, Daddy Yankee"
+  },
+  {
+    name: "Tujhe Dekha To",
+    time: "3:00 mins",
+    artist: "Kumar Sanu, Lata Mangeshkar"
+  },
+  {
+    name: "pushin P",
+    time: "3:00 mins",
+    artist: "Gunna"
   },
 ]
 
-const SongCard = (song) => (
+const SongCard = (props) => (
   <div>
-    <p style={{ textAlign: "center" }}>{song.name}</p>
+    <p style={{ textAlign: "center" }}>{props.song.name} - {props.song.artist} ({props.song.time})</p>
   </div>
 )
 
@@ -26,17 +46,11 @@ const TopSongs = () => (
     <SongHeading />
     <h1 style={{ textAlign: "center" }}>Top Songs</h1>
     <h2 style={{ textAlign: "center" }}>Here are your most played songs:</h2>
-
     {
       songData.map((s, i) => {
         return <SongCard song={s} key={i}></SongCard>
       })
     }
-    <p style={{ textAlign: "center" }}> Smoking Out The Window - Bruno Mars</p>
-    <p style={{ textAlign: "center" }}> Tum Hi Ho - Arijit Singh</p>
-    <p style={{ textAlign: "center" }}> Despacito - Luis Fonsi, Daddy Yankee</p>
-    <p style={{ textAlign: "center" }}> Tujhe Dekha To - Kumar Sanu, Lata Mangeshkar</p>
-    <p style={{ textAlign: "center" }}> pushin P - Gunna</p>
   </Layout>
 )
 
