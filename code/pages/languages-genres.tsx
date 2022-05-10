@@ -1,38 +1,69 @@
-import React from "react"
+import { Heading, Spinner, VStack } from "@chakra-ui/react"
+import { collection, onSnapshot, query } from "firebase/firestore"
+import { useEffect, useState } from "react"
 import Layout from "../components/layout/Layout"
+import SongHeading from "../components/top-songs/TopSongs"
+import { db } from "../util/firebase"
+import { Language, LanguageWithId } from "../types"
+import LanguageList from "../components/top-songs/LanguageList"
 
-const LanguageCard = (props) => (
-  <div>
-    <h3>{props.language}</h3>
-  </div>
-)
+const languageQuery = query(collection(db, 'languages'));
 
-let languages = ['English', 'Hindi', 'German', 'Telugu', 'Tamil']
+const LanguagesGenres = () => {
+  const [language, setLanguage] = useState<LanguageWithId[] | null>(null)
 
-const LanguagesGenres = () => (
-  <div>
-    <Layout title="Languages and Genres">
+  useEffect(() => {
+    const unsubscribe = onSnapshot(languageQuery, (querySnapshot) => {
+      setLanguage(querySnapshot.docs.map(obj => {
+        return { ...obj.data() as Language, id: obj.id } as LanguageWithId;
+      }));
+    })
+    return unsubscribe
+  }, [])
+
+  return (
+    <Layout title="Top Songs">
       <h1 style={{ textAlign: "center" }}>Languages & Genres</h1>
-      <div style={{ textAlign: "center" }}>
-        {
-          languages.map((l, i) => {
-            return <LanguageCard language={l} key={l}></LanguageCard>
-          })
-        }
-      </div>
+      <h2 style={{ textAlign: "center" }}>Here are the languages that can be played:</h2>
+      <VStack spacing={4}>
+        {language ? <LanguageList language={language} /> : <Spinner />}
+      </VStack>
     </Layout>
-  </div>
-  // <div>
-  // <Layout title="Languages and Genres">
-  //   {/* <h1 style={{ textAlign: 'center' }}>Languages & Genres</h1>
-  //   <p style={{ textAlign: "center" }}> </p> */}
-  //   {
-  //     languages.forEach((l, i) => {
-  //       <LanguageCard language={l}></LanguageCard>
-  //     })
-  //   }
-  // </Layout>
-  // </div>
-)
+  )
+}
+
+// const LanguageCard = (props) => (
+//   <div>
+//     <h3>{props.language}</h3>
+//   </div>
+// )
+
+// let languages = ['English', 'Hindi', 'German', 'Telugu', 'Tamil']
+
+// const LanguagesGenres = () => (
+//   <div>
+//     <Layout title="Languages and Genres">
+//       <h1 style={{ textAlign: "center" }}>Languages & Genres</h1>
+//       <div style={{ textAlign: "center" }}>
+//         {
+//           languages.map((l, i) => {
+//             return <LanguageCard language={l} key={l}></LanguageCard>
+//           })
+//         }
+//       </div>
+//     </Layout>
+//   </div>
+// <div>
+// <Layout title="Languages and Genres">
+//   {/* <h1 style={{ textAlign: 'center' }}>Languages & Genres</h1>
+//   <p style={{ textAlign: "center" }}> </p> */}
+//   {
+//     languages.forEach((l, i) => {
+//       <LanguageCard language={l}></LanguageCard>
+//     })
+//   }
+// </Layout>
+// </div>
+// )
 
 export default LanguagesGenres
