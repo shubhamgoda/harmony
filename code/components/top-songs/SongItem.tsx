@@ -16,7 +16,7 @@ const SongItem = ({ song: { id, name, time, artist } }: Props) => {
   // let isPlaying = false
 
   const playSong = () => {
-    getDownloadURL(ref(storage, 'songs/tum-hi-ho.mp3'))
+    getDownloadURL(ref(storage, 'songs/' + id + '.mp3'))
       .then((url: any) => {
         let audio = new Audio(url)
         audio.play()
