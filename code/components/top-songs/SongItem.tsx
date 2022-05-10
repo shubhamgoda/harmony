@@ -12,18 +12,35 @@ const SongItem = ({ song: { id, name, time, artist } }: Props) => {
   const docRef = doc(db, 'songs', id);
   const storage = getStorage();
 
-  // let audio = null
-  // let isPlaying = false
+  let audio: HTMLAudioElement | null = null
+  let paused = false
 
   const playSong = () => {
-    getDownloadURL(ref(storage, 'songs/' + id + '.mp3'))
-      .then((url: any) => {
-        let audio = new Audio(url)
-        audio.play()
-      })
-      .catch((error: any) => {
-        console.log(error)
-      });
+    if (audio && paused) {
+      audio.play()
+      paused = false
+    }
+    else {
+      if (audio) {
+        audio.pause()
+      }
+      getDownloadURL(ref(storage, 'songs/' + id + '.mp3'))
+        .then((url: any) => {
+          audio = new Audio(url)
+          audio.play()
+          paused = false
+        })
+        .catch((error: any) => {
+          console.log(error)
+        });
+    }
+  }
+
+  const pauseSong = () => {
+    if (!paused && audio) {
+      audio.pause()
+      paused = true
+    }
   }
 
   return (
@@ -32,11 +49,13 @@ const SongItem = ({ song: { id, name, time, artist } }: Props) => {
         {name} - {artist} ({time})
       </Text>
       <Button
-        size="lg"
         variant="ghost"
-        colorScheme="blue"
         onClick={playSong}
       >Play</Button>
+      <Button
+        variant="ghost"
+        onClick={pauseSong}
+      >Pause</Button>
     </HStack>
   )
 }
