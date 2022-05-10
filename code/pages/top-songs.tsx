@@ -1,57 +1,35 @@
+import { Heading, Spinner, VStack } from "@chakra-ui/react"
+import { collection, onSnapshot, query } from "firebase/firestore"
+import { useEffect, useState } from "react"
 import Layout from "../components/layout/Layout"
 import SongHeading from "../components/top-songs/TopSongs"
+import { db } from "../util/firebase"
+import { Song, SongWithId } from "../types"
+import SongList from "../components/top-songs/SongList"
 
-type Song = {
-  name: string,
-  time: string,
-  artist: string
+const songQuery = query(collection(db, 'songs'));
+
+const TopSongs = () => {
+  const [songs, setSongs] = useState<SongWithId[] | null>(null)
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(songQuery, (querySnapshot) => {
+      setSongs(querySnapshot.docs.map(obj => {
+        return { ...obj.data() as Song, id: obj.id } as SongWithId;
+      }));
+    })
+    return unsubscribe
+  }, [])
+
+  return (
+    <Layout title="Top Songs">
+      <h1 style={{ textAlign: "center" }}>Top Songs</h1>
+      <h2 style={{ textAlign: "center" }}>Here are your most played songs:</h2>
+      <VStack spacing={4}>
+        {songs ? <SongList songs={songs} /> : <Spinner />}
+      </VStack>
+    </Layout>
+  )
 }
-
-const songData: Song[] = [
-  {
-    name: "Smoking Out The Window",
-    time: "3:00 mins",
-    artist: "Bruno Mars"
-  },
-  {
-    name: "Tum Hi Ho",
-    time: "3:00 mins",
-    artist: "Arijit Singh"
-  },
-  {
-    name: "Despacito",
-    time: "3:00 mins",
-    artist: "Luis Fonsi, Daddy Yankee"
-  },
-  {
-    name: "Tujhe Dekha To",
-    time: "3:00 mins",
-    artist: "Kumar Sanu, Lata Mangeshkar"
-  },
-  {
-    name: "pushin P",
-    time: "3:00 mins",
-    artist: "Gunna"
-  },
-]
-
-const SongCard = (props) => (
-  <div>
-    <p style={{ textAlign: "center" }}>{props.song.name} - {props.song.artist} ({props.song.time})</p>
-  </div>
-)
-
-const TopSongs = () => (
-  <Layout title="Top Songs">
-    <SongHeading />
-    <h1 style={{ textAlign: "center" }}>Top Songs</h1>
-    <h2 style={{ textAlign: "center" }}>Here are your most played songs:</h2>
-    {
-      songData.map((s, i) => {
-        return <SongCard song={s} key={i}></SongCard>
-      })
-    }
-  </Layout>
-)
 
 export default TopSongs
