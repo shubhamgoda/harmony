@@ -12,7 +12,7 @@ const SongList = ({ songs }: Props) => {
       {songs.length ? (
         songs.map((song) => <SongItem key={song.id} song={song} />)
       ) : (
-        <Text>There are no favorite songs right now 👀</Text>
+        <Text>There are no songs here right now 👀</Text>
       )}
     </VStack>
   )
