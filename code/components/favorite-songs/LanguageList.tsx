@@ -1,9 +1,23 @@
 import { Text, VStack, Button } from "@chakra-ui/react"
+import Link from "next/link"
+import NextLink from "next/link"
 import { LanguageWithId } from "../../types"
 
 type Props = {
   readonly language: LanguageWithId[]
 }
+
+type NavLinkData = {
+  name: string
+  path: string
+}
+
+const navData: NavLinkData[] = [
+  {
+    name: "Top Songs - ",
+    path: "/languages-genres/top-songs",
+  },
+]
 
 const LanguageList = ({ language }: Props) => {
   return (
@@ -15,7 +29,9 @@ const LanguageList = ({ language }: Props) => {
             size="lg"
             variant="ghost"
             colorScheme="blue"
-          >{language.name}</Button>)
+          > <Link key={navData[0].path} href={navData[0].path}>
+              <a>{language.name} </a>
+            </Link></Button>)
       ) : (
         <Text>There are no languages right now 👀</Text>
       )}
