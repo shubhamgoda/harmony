@@ -2,9 +2,7 @@ export type Song = {
   name: string,
   time: string,
   artist: string,
-  favorite: boolean,
   language: string,
-  trash: boolean
 }
 
 export type Language = {
@@ -16,5 +14,13 @@ export type SongWithId = Song & {
 }
 
 export type LanguageWithId = Language & {
+  id: string
+}
+
+export type FavoriteSong = Song & {
+  owner: string
+}
+
+export type FavoriteSongWithId = FavoriteSong & {
   id: string
 }

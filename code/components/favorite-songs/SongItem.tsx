@@ -4,14 +4,17 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { SongWithId } from "../../types"
 import { db } from "../../util/firebase"
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { useAuth } from "../auth/AuthUserProvider"
 
 type Props = {
   readonly song: SongWithId
+  readonly trash: boolean
 }
 
-const SongItem = ({ song: { id, name, time, artist, trash } }: Props) => {
-  const docRef = doc(db, 'songs', id);
+const SongItem = ({ song: { id, name, time, artist }, trash }: Props) => {
   const storage = getStorage();
+  const { user } = useAuth();
+  const filename = trash ? id.substring(0, id.lastIndexOf("-")) : id
 
   let audio: HTMLAudioElement | null = null
   let paused = false
@@ -25,7 +28,7 @@ const SongItem = ({ song: { id, name, time, artist, trash } }: Props) => {
       if (audio) {
         audio.pause()
       }
-      getDownloadURL(ref(storage, 'songs/' + id + '.mp3'))
+      getDownloadURL(ref(storage, 'songs/' + filename + '.mp3'))
         .then((url: string) => {
           audio = new Audio(url)
           audio.play()
@@ -45,9 +48,8 @@ const SongItem = ({ song: { id, name, time, artist, trash } }: Props) => {
   }
 
   const deleteSong = () => {
-    updateDoc(docRef, {
-      favorite: false
-    });
+    const docRef = doc(db, 'favorite-songs', id);
+    deleteDoc(docRef);
   }
 
   return (

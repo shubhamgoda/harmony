@@ -1,14 +1,16 @@
 import { Button, HStack, Input, Select } from "@chakra-ui/react"
 import { addDoc, collection, doc, onSnapshot, query, setDoc, updateDoc } from "firebase/firestore"
 import { FormEventHandler, useEffect, useState } from "react"
-import { Song, SongWithId } from "../../types"
+import { FavoriteSong, Song, SongWithId } from "../../types"
 import { db } from "../../util/firebase"
+import { useAuth } from "../auth/AuthUserProvider"
 
 const songQuery = query(collection(db, 'songs'));
 
 const SongAddControl = () => {
   const [input, setInput] = useState("")
   const [songs, setSongs] = useState<SongWithId[] | null>(null)
+  const { user } = useAuth();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(songQuery, (querySnapshot) => {
@@ -27,9 +29,17 @@ const SongAddControl = () => {
     e.preventDefault()
     if (input === "") return
 
-    updateDoc(doc(db, "songs", input), {
-      favorite: true
-    });
+    const songWithId = songs?.find(x => x.id === input)
+
+    const favoriteSong = {
+      name: songWithId?.name || "",
+      time: songWithId?.time || "",
+      artist: songWithId?.artist || "",
+      language: songWithId?.language || "",
+      owner: user!.uid,
+    }
+
+    setDoc(doc(db, "favorite-songs", input + "-" + user!.uid), favoriteSong)
 
     setInput("");
   }

@@ -66,7 +66,7 @@ const Navbar = () => {
             colorScheme={"facebook"}
             onClick={signOut}
           >
-            Sign Out
+            Sign Out ({user.email})
           </Button>
         ) : (
           <Button

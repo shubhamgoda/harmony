@@ -1,22 +1,25 @@
 import { Heading, Spinner, VStack } from "@chakra-ui/react"
-import { collection, onSnapshot, query } from "firebase/firestore"
+import { collection, onSnapshot, query, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import Layout from "../components/layout/Layout"
 import SongHeading from "../components/favorite-songs/FavoriteSongs"
 import { db } from "../util/firebase"
-import { Song, SongWithId } from "../types"
+import { FavoriteSong, FavoriteSongWithId } from "../types"
 import SongList from "../components/favorite-songs/SongList"
 import SongAddControl from "../components/favorite-songs/SongAddControl"
-
-const songQuery = query(collection(db, 'songs'));
+import { useAuth } from "../components/auth/AuthUserProvider"
 
 const FavoriteSongs = () => {
-  const [songs, setSongs] = useState<SongWithId[] | null>(null)
+  const [songs, setSongs] = useState<FavoriteSongWithId[] | null>(null)
+
+  const { user } = useAuth()
+
+  const songQuery = query(collection(db, 'favorite-songs'), where('owner', '==', user!.uid));
 
   useEffect(() => {
     const unsubscribe = onSnapshot(songQuery, (querySnapshot) => {
-      setSongs(querySnapshot.docs.filter(obj => obj.get('favorite')).map(obj => {
-        return { ...obj.data() as Song, id: obj.id, trash: true } as SongWithId;
+      setSongs(querySnapshot.docs.map(obj => {
+        return { ...obj.data() as FavoriteSong, id: obj.id } as FavoriteSongWithId;
       }));
     })
     return unsubscribe
@@ -28,7 +31,7 @@ const FavoriteSongs = () => {
       <h2 style={{ textAlign: "center" }}>Here are your favorite songs:</h2>
       <VStack spacing={4}>
         <SongAddControl />
-        {songs ? <SongList songs={songs} /> : <Spinner />}
+        {songs ? <SongList songs={songs} trash={true} /> : <Spinner />}
       </VStack>
     </Layout>
   )
