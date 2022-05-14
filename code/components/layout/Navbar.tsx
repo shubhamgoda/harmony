@@ -50,6 +50,7 @@ const NavLink = ({ name, path }: NavLinkData) => {
 }
 
 const Navbar = () => {
+  const { user, loading } = useAuth()
   return (
     <Box px={4} shadow="base">
       <HStack justifyContent="space-between">
@@ -58,51 +59,28 @@ const Navbar = () => {
             <NavLink key={data.path} {...data} />
           ))}
         </HStack>
+        {user ? (
+          <Button
+            _focusVisible={{ shadow: "outline" }}
+            _focus={{ shadow: "none" }}
+            colorScheme={"facebook"}
+            onClick={signOut}
+          >
+            Sign Out
+          </Button>
+        ) : (
+          <Button
+            _focusVisible={{ shadow: "outline" }}
+            _focus={{ shadow: "none" }}
+            colorScheme={"facebook"}
+            onClick={signInWithGoogle}
+          >
+            Sign In
+          </Button>
+        )}
       </HStack>
     </Box>
   )
 }
 
-// const Navbar = () => {
-//   const { user, loading } = useAuth()
-//   return (
-//     <header>
-//       <nav>
-//         {navData
-//           .map(({ name, path }) => (
-//             <Link key={path} href={path}>
-//               <a>{name}</a>
-//             </Link>
-//           ))
-//           // @ts-ignore
-//           .reduce((left, right) => [left, " | ", right])}
-//       </nav>
-//       <Box>
-//         {user ? (
-//           <Button
-//             _focusVisible={{ shadow: "outline" }}
-//             _focus={{ shadow: "none" }}
-//             colorScheme={"facebook"}
-//             onClick={signOut}
-//           >
-//             Sign Out
-//           </Button>
-//         ) : (
-//           <Button
-//             _focusVisible={{ shadow: "outline" }}
-//             _focus={{ shadow: "none" }}
-//             colorScheme={"facebook"}
-//             onClick={signInWithGoogle}
-//           >
-//             Sign In
-//           </Button>
-//         )}
-//       </Box>
-//     </header>
-//   )
-// }
-
 export default Navbar
-
-
-

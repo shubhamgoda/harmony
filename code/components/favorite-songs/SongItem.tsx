@@ -57,17 +57,19 @@ const SongItem = ({ song: { id, name, time, artist, trash } }: Props) => {
           {name} - {artist} ({time})
         </Text>
         <Button
-          variant="ghost"
+          size='xs'
+          variant="solid"
           onClick={playSong}
         >Play</Button>
         <Button
-          variant="ghost"
+          size='xs'
+          variant="solid"
           onClick={pauseSong}
         >Pause</Button>
         <IconButton
           aria-label="delete song"
           size="xs"
-          variant="ghost"
+          variant="solid"
           colorScheme="red"
           icon={<DeleteIcon />}
           onClick={deleteSong}
@@ -79,11 +81,13 @@ const SongItem = ({ song: { id, name, time, artist, trash } }: Props) => {
           {name} - {artist} ({time})
         </Text>
         <Button
-          variant="ghost"
+          size='xs'
+          variant="solid"
           onClick={playSong}
         >Play</Button>
         <Button
-          variant="ghost"
+          size='xs'
+          variant="solid"
           onClick={pauseSong}
         >Pause</Button>
       </HStack>

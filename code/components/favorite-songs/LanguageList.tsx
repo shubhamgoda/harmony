@@ -34,7 +34,7 @@ const LanguageList = ({ language }: Props) => {
           <Button
             key={language.id}
             size="lg"
-            variant="ghost"
+            variant="solid"
             colorScheme="blue"
           > <Link key={navData[0].path} href={"/top-songs?name=" + language.name} >
               <a>{myFunction(language.name)} </a>

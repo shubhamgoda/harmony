@@ -7,31 +7,8 @@ const IndexPage = () => {
   const { user, loading } = useAuth()
   return (
     <Layout title="Home">
-      <VStack spacing={4}>
-        <div>
-          <h1 style={{ textAlign: "center" }}> <span>Welcome </span><span>to</span> <span>Harmony</span></h1>
-          <p style={{ textAlign: "center" }}>The #1 source for all your favorite music</p>
-        </div>
-        {user ? (
-          <Button
-            _focusVisible={{ shadow: "outline" }}
-            _focus={{ shadow: "none" }}
-            colorScheme={"facebook"}
-            onClick={signOut}
-          >
-            Sign Out
-          </Button>
-        ) : (
-          <Button
-            _focusVisible={{ shadow: "outline" }}
-            _focus={{ shadow: "none" }}
-            colorScheme={"facebook"}
-            onClick={signInWithGoogle}
-          >
-            Sign In
-          </Button>
-        )}
-      </VStack>
+      <h1 style={{ textAlign: "center" }}> <span>Welcome </span><span>to</span> <span>Harmony</span></h1>
+      <p style={{ textAlign: "center" }}>The #1 source for all your favorite music</p>
     </Layout>
   )
 }
