@@ -6,6 +6,7 @@ import SongHeading from "../components/favorite-songs/FavoriteSongs"
 import { db } from "../util/firebase"
 import { Song, SongWithId } from "../types"
 import SongList from "../components/favorite-songs/SongList"
+import SongAddControl from "../components/favorite-songs/SongAddControl"
 
 const songQuery = query(collection(db, 'songs'));
 
@@ -26,6 +27,7 @@ const FavoriteSongs = () => {
       <h1 style={{ textAlign: "center" }}>Favorite Songs</h1>
       <h2 style={{ textAlign: "center" }}>Here are your favorite songs:</h2>
       <VStack spacing={4}>
+        <SongAddControl />
         {songs ? <SongList songs={songs} /> : <Spinner />}
       </VStack>
     </Layout>
