@@ -42,6 +42,7 @@ const SongItem = ({ song: { id, name, time, artist }, trash }: Props) => {
   }
 
   const deleteSong = () => {
+    pauseSong()
     const docRef = doc(db, 'favorite-songs', id);
     deleteDoc(docRef);
   }

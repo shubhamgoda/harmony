@@ -25,12 +25,15 @@ const FavoriteSongs = () => {
 
   return (
     <Layout title="Favorite Songs">
+      <br></br>
       <h1 style={{ textAlign: "center" }}>Favorite Songs</h1>
       <h2 style={{ textAlign: "center" }}>Here are your favorite songs:</h2>
+      <br></br>
       <VStack spacing={4}>
         <SongAddControl />
         {songs ? <SongList songs={songs} trash={true} /> : <Spinner />}
       </VStack>
+      <br></br>
     </Layout>
   )
 }

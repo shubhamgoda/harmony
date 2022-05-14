@@ -22,11 +22,14 @@ const LanguagesGenres = () => {
 
   return (
     <Layout title="Favorite Songs">
+      <br></br>
       <h1 style={{ textAlign: "center" }}>Languages</h1>
       <h2 style={{ textAlign: "center" }}>Here are the languages that can be played:</h2>
+      <br></br>
       <VStack spacing={4}>
         {languages ? <LanguageList languages={languages} /> : <Spinner />}
       </VStack>
+      <br></br>
     </Layout>
   )
 }
