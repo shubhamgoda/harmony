@@ -11,13 +11,14 @@ import LanguageList from "../components/favorite-songs/LanguageList"
 const LanguagesGenres = () => {
   const [songs, setSongs] = useState<SongWithId[] | null>(null)
 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const languageName = urlParams.get('name')
-  const languageID = languageName?.toLowerCase()
-  const songQuery = query(collection(db, 'songs'), where("language", "==", "" + languageID));
+  let languageName = null
 
   useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    languageName = urlParams.get('name')
+    const languageID = languageName?.toLowerCase()
+    const songQuery = query(collection(db, 'songs'), where("language", "==", "" + languageID));
     const unsubscribe = onSnapshot(songQuery, (querySnapshot) => {
       setSongs(querySnapshot.docs.map(obj => {
         return { ...obj.data() as Song, id: obj.id } as SongWithId;
