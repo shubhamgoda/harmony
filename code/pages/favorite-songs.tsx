@@ -16,7 +16,7 @@ const FavoriteSongs = () => {
   useEffect(() => {
     const unsubscribe = onSnapshot(songQuery, (querySnapshot) => {
       setSongs(querySnapshot.docs.filter(obj => obj.get('favorite')).map(obj => {
-        return { ...obj.data() as Song, id: obj.id } as SongWithId;
+        return { ...obj.data() as Song, id: obj.id, trash: true } as SongWithId;
       }));
     })
     return unsubscribe
