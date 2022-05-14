@@ -1,5 +1,5 @@
-import { Button, HStack, Input, Select } from "@chakra-ui/react"
-import { addDoc, collection, doc, onSnapshot, query, setDoc, updateDoc } from "firebase/firestore"
+import { Button, HStack, Select } from "@chakra-ui/react"
+import { collection, doc, onSnapshot, query, setDoc } from "firebase/firestore"
 import { FormEventHandler, useEffect, useState } from "react"
 import { FavoriteSong, Song, SongWithId } from "../../types"
 import { db } from "../../util/firebase"
@@ -31,7 +31,7 @@ const SongAddControl = () => {
 
     const songWithId = songs?.find(x => x.id === input)
 
-    const favoriteSong = {
+    const favoriteSong: FavoriteSong = {
       name: songWithId?.name || "",
       time: songWithId?.time || "",
       artist: songWithId?.artist || "",

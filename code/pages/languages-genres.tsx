@@ -1,4 +1,4 @@
-import { Heading, Spinner, VStack } from "@chakra-ui/react"
+import { Spinner, VStack } from "@chakra-ui/react"
 import { collection, onSnapshot, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import Layout from "../components/layout/Layout"
@@ -22,7 +22,7 @@ const LanguagesGenres = () => {
 
   return (
     <Layout title="Favorite Songs">
-      <h1 style={{ textAlign: "center" }}>Languages & Genres</h1>
+      <h1 style={{ textAlign: "center" }}>Languages</h1>
       <h2 style={{ textAlign: "center" }}>Here are the languages that can be played:</h2>
       <VStack spacing={4}>
         {languages ? <LanguageList languages={languages} /> : <Spinner />}

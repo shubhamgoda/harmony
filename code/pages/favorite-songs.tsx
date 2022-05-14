@@ -1,4 +1,4 @@
-import { Heading, Spinner, VStack } from "@chakra-ui/react"
+import { Spinner, VStack } from "@chakra-ui/react"
 import { collection, onSnapshot, query, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import Layout from "../components/layout/Layout"
@@ -12,7 +12,7 @@ const FavoriteSongs = () => {
   const [songs, setSongs] = useState<FavoriteSongWithId[] | null>(null)
 
   const { user } = useAuth()
-  const songQuery = user ? query(collection(db, 'favorite-songs'), where('owner', '==', user!.uid)) : query(collection(db, 'favorite-songs'));
+  const songQuery = user ? query(collection(db, 'favorite-songs'), where('owner', '==', user!.uid)) : query(collection(db, 'placeholder'));
 
   useEffect(() => {
     const unsubscribe = onSnapshot(songQuery, (querySnapshot) => {

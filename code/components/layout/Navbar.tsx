@@ -1,5 +1,4 @@
 import React from "react"
-import Link from "next/link"
 import { useAuth } from "../auth/AuthUserProvider"
 import NextLink from "next/link"
 import { Button, Box, HStack } from "@chakra-ui/react"
@@ -21,7 +20,7 @@ const navData: NavLinkData[] = [
     path: "/favorite-songs",
   },
   {
-    name: "Languages & Genres",
+    name: "Languages",
     path: "/languages-genres",
   },
 ]

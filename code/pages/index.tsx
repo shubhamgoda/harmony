@@ -1,7 +1,5 @@
-import { Button, Heading, Text, VStack } from "@chakra-ui/react"
 import { useAuth } from "../components/auth/AuthUserProvider"
 import Layout from "../components/layout/Layout"
-import { signInWithGoogle, signOut } from "../util/firebase"
 
 const IndexPage = () => {
   const { user, loading } = useAuth()
