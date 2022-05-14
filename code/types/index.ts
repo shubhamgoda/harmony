@@ -1,7 +1,8 @@
 export type Song = {
   name: string,
   time: string,
-  artist: string
+  artist: string,
+  favorite: boolean,
 }
 
 export type Language = {

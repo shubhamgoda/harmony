@@ -1,4 +1,5 @@
-import { HStack, Button, Text } from "@chakra-ui/react"
+import { DeleteIcon } from "@chakra-ui/icons"
+import { HStack, Button, Text, IconButton } from "@chakra-ui/react"
 import { deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { SongWithId } from "../../types"
 import { db } from "../../util/firebase"
@@ -43,6 +44,12 @@ const SongItem = ({ song: { id, name, time, artist } }: Props) => {
     }
   }
 
+  const deleteSong = () => {
+    updateDoc(docRef, {
+      favorite: false
+    });
+  }
+
   return (
     <HStack w="100%">
       <Text>
@@ -56,6 +63,14 @@ const SongItem = ({ song: { id, name, time, artist } }: Props) => {
         variant="ghost"
         onClick={pauseSong}
       >Pause</Button>
+      <IconButton
+        aria-label="delete song"
+        size="xs"
+        variant="ghost"
+        colorScheme="red"
+        icon={<DeleteIcon />}
+        onClick={deleteSong}
+      />
     </HStack>
   )
 }
