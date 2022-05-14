@@ -30,21 +30,14 @@ const NavLink = ({ name, path }: NavLinkData) => {
   const { pathname: currentPath } = useRouter()
   return (
     <NextLink key={path} href={path} passHref>
-      <Link
-        _hover={{
-          textDecoration: "none",
-        }}
-        tabIndex={-1}
+      <Button
+        _focusVisible={{ shadow: "outline" }}
+        _focus={{ shadow: "none" }}
+        colorScheme={"facebook"}
+        variant={currentPath === path ? "solid" : "ghost"}
       >
-        <Button
-          _focusVisible={{ shadow: "outline" }}
-          _focus={{ shadow: "none" }}
-          colorScheme={"facebook"}
-          variant={currentPath === path ? "solid" : "ghost"}
-        >
-          {name}
-        </Button>
-      </Link>
+        {name}
+      </Button>
     </NextLink>
   )
 }
