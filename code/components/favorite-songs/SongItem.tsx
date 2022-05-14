@@ -5,6 +5,7 @@ import { SongWithId } from "../../types"
 import { db } from "../../util/firebase"
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../auth/AuthUserProvider"
+import { useEffect, useState } from "react"
 
 type Props = {
   readonly song: SongWithId
@@ -14,37 +15,29 @@ type Props = {
 const SongItem = ({ song: { id, name, time, artist }, trash }: Props) => {
   const storage = getStorage();
   const { user } = useAuth();
-  const filename = trash ? id.substring(0, id.lastIndexOf("-")) : id
+  const filename: string = trash ? id.substring(0, id.lastIndexOf("-")) : id
   const canRemove = trash && user
-
-  let audio: HTMLAudioElement | null = null
-  let paused = false
+  let audio: HTMLAudioElement;
+  getDownloadURL(ref(storage, 'songs/' + filename + '.mp3'))
+    .then((url: string) => {
+      audio = new Audio(url)
+    })
+    .catch((error: string) => {
+      console.log(error)
+    });
 
   const playSong = () => {
-    if (audio && paused) {
-      audio.play()
-      paused = false
+    if (audio!.paused) {
+      audio!.play()
     }
     else {
-      if (audio) {
-        audio.pause()
-      }
-      getDownloadURL(ref(storage, 'songs/' + filename + '.mp3'))
-        .then((url: string) => {
-          audio = new Audio(url)
-          audio.play()
-          paused = false
-        })
-        .catch((error: string) => {
-          console.log(error)
-        });
+      audio!.currentTime = 0
     }
   }
 
   const pauseSong = () => {
-    if (!paused && audio) {
-      audio.pause()
-      paused = true
+    if (!audio!.paused) {
+      audio!.pause()
     }
   }
 
@@ -54,46 +47,29 @@ const SongItem = ({ song: { id, name, time, artist }, trash }: Props) => {
   }
 
   return (
-    canRemove ?
-      <HStack w="100%">
-        <Text>
-          {name} - {artist} ({time})
-        </Text>
-        <Button
-          size='xs'
-          variant="solid"
-          onClick={playSong}
-        >Play</Button>
-        <Button
-          size='xs'
-          variant="solid"
-          onClick={pauseSong}
-        >Pause</Button>
-        <IconButton
-          aria-label="delete song"
-          size="xs"
-          variant="solid"
-          colorScheme="red"
-          icon={<DeleteIcon />}
-          onClick={deleteSong}
-        />
-      </HStack>
-      :
-      <HStack w="100%">
-        <Text>
-          {name} - {artist} ({time})
-        </Text>
-        <Button
-          size='xs'
-          variant="solid"
-          onClick={playSong}
-        >Play</Button>
-        <Button
-          size='xs'
-          variant="solid"
-          onClick={pauseSong}
-        >Pause</Button>
-      </HStack>
+    <HStack w="100%">
+      <Text>
+        {name} - {artist} ({time})
+      </Text> :
+      <Button
+        size='xs'
+        variant="solid"
+        onClick={playSong}
+      >Play</Button>
+      <Button
+        size='xs'
+        variant="solid"
+        onClick={pauseSong}
+      >Pause</Button>
+      {canRemove && <IconButton
+        aria-label="delete song"
+        size="xs"
+        variant="solid"
+        colorScheme="red"
+        icon={<DeleteIcon />}
+        onClick={deleteSong}
+      />}
+    </HStack>
   )
 }
 
