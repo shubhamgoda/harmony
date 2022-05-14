@@ -27,7 +27,7 @@ const SongAddControl = () => {
 
   const addSong: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    if (input === "") return
+    if (input === "" || !user) return
 
     const songWithId = songs?.find(x => x.id === input)
 

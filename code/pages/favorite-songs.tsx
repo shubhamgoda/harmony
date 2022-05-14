@@ -13,8 +13,7 @@ const FavoriteSongs = () => {
   const [songs, setSongs] = useState<FavoriteSongWithId[] | null>(null)
 
   const { user } = useAuth()
-
-  const songQuery = user ? query(collection(db, 'favorite-songs'), where('owner', '==', user!.uid)) : query(collection(db, "songs"));
+  const songQuery = user ? query(collection(db, 'favorite-songs'), where('owner', '==', user!.uid)) : query(collection(db, 'favorite-songs'));
 
   useEffect(() => {
     const unsubscribe = onSnapshot(songQuery, (querySnapshot) => {
@@ -23,7 +22,7 @@ const FavoriteSongs = () => {
       }));
     })
     return unsubscribe
-  }, [songQuery])
+  }, [user])
 
   return (
     <Layout title="Favorite Songs">

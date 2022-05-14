@@ -15,6 +15,7 @@ const SongItem = ({ song: { id, name, time, artist }, trash }: Props) => {
   const storage = getStorage();
   const { user } = useAuth();
   const filename = trash ? id.substring(0, id.lastIndexOf("-")) : id
+  const canRemove = trash && user
 
   let audio: HTMLAudioElement | null = null
   let paused = false
@@ -53,7 +54,7 @@ const SongItem = ({ song: { id, name, time, artist }, trash }: Props) => {
   }
 
   return (
-    trash ?
+    canRemove ?
       <HStack w="100%">
         <Text>
           {name} - {artist} ({time})

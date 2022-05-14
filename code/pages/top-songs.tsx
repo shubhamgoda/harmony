@@ -5,8 +5,6 @@ import Layout from "../components/layout/Layout"
 import { db } from "../util/firebase"
 import { Song, SongWithId } from "../types"
 import SongList from "../components/favorite-songs/SongList"
-import SongAddControl from "../components/favorite-songs/SongAddControl"
-import LanguageList from "../components/favorite-songs/LanguageList"
 
 const LanguagesGenres = () => {
   const [songs, setSongs] = useState<SongWithId[] | null>(null)
