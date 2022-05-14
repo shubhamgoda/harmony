@@ -15,9 +15,16 @@ type NavLinkData = {
 const navData: NavLinkData[] = [
   {
     name: "Top Songs - ",
-    path: "/languages-genres/top-songs",
+    path: "/top-songs",
   },
 ]
+
+let lst: String[] = []
+
+function myFunction(id: String) {
+  lst.push(id)
+  return id
+}
 
 const LanguageList = ({ language }: Props) => {
   return (
@@ -29,13 +36,13 @@ const LanguageList = ({ language }: Props) => {
             size="lg"
             variant="ghost"
             colorScheme="blue"
-          > <Link key={navData[0].path} href={navData[0].path}>
-              <a>{language.name} </a>
+          > <Link key={navData[0].path} href={"/top-songs?name=" + language.name} >
+              <a>{myFunction(language.name)} </a>
             </Link></Button>)
       ) : (
         <Text>There are no languages right now 👀</Text>
       )}
-    </VStack>
+    </VStack >
   )
 }
 

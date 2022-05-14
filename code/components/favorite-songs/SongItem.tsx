@@ -9,7 +9,7 @@ type Props = {
   readonly song: SongWithId
 }
 
-const SongItem = ({ song: { id, name, time, artist } }: Props) => {
+const SongItem = ({ song: { id, name, time, artist, trash } }: Props) => {
   const docRef = doc(db, 'songs', id);
   const storage = getStorage();
 
@@ -51,27 +51,42 @@ const SongItem = ({ song: { id, name, time, artist } }: Props) => {
   }
 
   return (
-    <HStack w="100%">
-      <Text>
-        {name} - {artist} ({time})
-      </Text>
-      <Button
-        variant="ghost"
-        onClick={playSong}
-      >Play</Button>
-      <Button
-        variant="ghost"
-        onClick={pauseSong}
-      >Pause</Button>
-      <IconButton
-        aria-label="delete song"
-        size="xs"
-        variant="ghost"
-        colorScheme="red"
-        icon={<DeleteIcon />}
-        onClick={deleteSong}
-      />
-    </HStack>
+    trash ?
+      <HStack w="100%">
+        <Text>
+          {name} - {artist} ({time})
+        </Text>
+        <Button
+          variant="ghost"
+          onClick={playSong}
+        >Play</Button>
+        <Button
+          variant="ghost"
+          onClick={pauseSong}
+        >Pause</Button>
+        <IconButton
+          aria-label="delete song"
+          size="xs"
+          variant="ghost"
+          colorScheme="red"
+          icon={<DeleteIcon />}
+          onClick={deleteSong}
+        />
+      </HStack>
+      :
+      <HStack w="100%">
+        <Text>
+          {name} - {artist} ({time})
+        </Text>
+        <Button
+          variant="ghost"
+          onClick={playSong}
+        >Play</Button>
+        <Button
+          variant="ghost"
+          onClick={pauseSong}
+        >Pause</Button>
+      </HStack>
   )
 }
 

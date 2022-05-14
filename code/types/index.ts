@@ -3,7 +3,8 @@ export type Song = {
   time: string,
   artist: string,
   favorite: boolean,
-  language: string
+  language: string,
+  trash: boolean
 }
 
 export type Language = {
