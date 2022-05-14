@@ -1,6 +1,6 @@
 import { DeleteIcon } from "@chakra-ui/icons"
 import { HStack, Button, Text, IconButton } from "@chakra-ui/react"
-import { deleteDoc, doc, updateDoc } from "firebase/firestore"
+import { deleteDoc, doc } from "firebase/firestore"
 import { SongWithId } from "../../types"
 import { db } from "../../util/firebase"
 import { getStorage, ref, getDownloadURL } from "firebase/storage";

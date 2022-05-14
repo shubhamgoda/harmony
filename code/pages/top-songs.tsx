@@ -8,14 +8,16 @@ import SongList from "../components/favorite-songs/SongList"
 
 const LanguagesGenres = () => {
   const [songs, setSongs] = useState<SongWithId[] | null>(null)
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const languageName = urlParams.get('name')
-  const languageID = languageName?.toLowerCase()
-  const songQuery = query(collection(db, 'songs'), where("language", "==", "" + languageID));
+  const [name, setName] = useState("")
 
   useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const languageName = urlParams.get('name')!
+    setName(languageName)
+    const languageID = languageName.toLowerCase()
+    const songQuery = query(collection(db, 'songs'), where("language", "==", "" + languageID));
+
     const unsubscribe = onSnapshot(songQuery, (querySnapshot) => {
       setSongs(querySnapshot.docs.map(obj => {
         return { ...obj.data() as Song, id: obj.id } as SongWithId;
@@ -28,7 +30,7 @@ const LanguagesGenres = () => {
     <Layout title="Top Songs">
       <br></br>
       <h1 style={{ textAlign: "center" }}>Languages</h1>
-      <h2 style={{ textAlign: "center" }}>Here are the songs that can be played in {languageName}:</h2>
+      <h2 style={{ textAlign: "center" }}>Here are the songs that can be played in {name}:</h2>
       <br></br>
       <VStack spacing={4}>
         {songs ? < SongList songs={songs} trash={false} /> : <Spinner />}
