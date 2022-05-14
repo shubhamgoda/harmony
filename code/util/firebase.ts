@@ -1,5 +1,12 @@
 import { initializeApp, getApps, getApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth"
+import withFirebaseAuth from "react-with-firebase-auth"
 
 const firebaseConfig = {
   apiKey: "AIzaSyA7-M7ylhSPp11ji6VQSQP-IxSMIBIFATU",
@@ -12,6 +19,30 @@ const firebaseConfig = {
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig)
 
+const auth = getAuth(app);
 const db = getFirestore(app)
 
-export { db }
+const providers = {
+  googleProvider: new GoogleAuthProvider(),
+}
+
+const createComponentWithAuth = withFirebaseAuth({
+  providers,
+  firebaseAppAuth: auth,
+})
+
+const signInWithGoogle = () => {
+  signInWithPopup(auth, providers.googleProvider)
+}
+
+const signOutFirebase = () => {
+  signOut(auth)
+}
+
+export {
+  db,
+  auth,
+  createComponentWithAuth,
+  signInWithGoogle,
+  signOutFirebase as signOut,
+}
