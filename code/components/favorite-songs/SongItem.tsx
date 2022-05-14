@@ -26,12 +26,12 @@ const SongItem = ({ song: { id, name, time, artist } }: Props) => {
         audio.pause()
       }
       getDownloadURL(ref(storage, 'songs/' + id + '.mp3'))
-        .then((url: any) => {
+        .then((url: string) => {
           audio = new Audio(url)
           audio.play()
           paused = false
         })
-        .catch((error: any) => {
+        .catch((error: string) => {
           console.log(error)
         });
     }
