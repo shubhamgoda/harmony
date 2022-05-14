@@ -8,4 +8,4 @@ On the favorite songs page, you can add your own favorite songs that will be sav
 
 Repository: https://github.com/shubhamgoda/harmony
 
-Deployed Site: https://harmony-d9oaxzzdu-shubhamgoda.vercel.app/
+Deployed Site: https://harmony-five.vercel.app/
