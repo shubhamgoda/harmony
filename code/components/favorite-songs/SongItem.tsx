@@ -5,7 +5,6 @@ import { SongWithId } from "../../types"
 import { db } from "../../util/firebase"
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../auth/AuthUserProvider"
-import { useEffect, useState } from "react"
 
 type Props = {
   readonly song: SongWithId

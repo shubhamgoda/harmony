@@ -50,7 +50,7 @@ const SongAddControl = () => {
         <Select
           value={input}
           onChange={handleChange}
-          placeholder="Pick a song..."
+          placeholder="Pick a song (must be logged in)..."
         >
           {songs ? (songs.map((song) => <option value={song.id} key={song.id}>{song.name} - {song.artist}</option>)) : <></>}
         </Select>
