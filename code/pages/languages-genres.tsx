@@ -2,10 +2,10 @@ import { Heading, Spinner, VStack } from "@chakra-ui/react"
 import { collection, onSnapshot, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import Layout from "../components/layout/Layout"
-import SongHeading from "../components/top-songs/TopSongs"
+import SongHeading from "../components/favorite-songs/FavoriteSongs"
 import { db } from "../util/firebase"
 import { Language, LanguageWithId } from "../types"
-import LanguageList from "../components/top-songs/LanguageList"
+import LanguageList from "../components/favorite-songs/LanguageList"
 
 const languageQuery = query(collection(db, 'languages'));
 
@@ -22,7 +22,7 @@ const LanguagesGenres = () => {
   }, [])
 
   return (
-    <Layout title="Top Songs">
+    <Layout title="Favorite Songs">
       <h1 style={{ textAlign: "center" }}>Languages & Genres</h1>
       <h2 style={{ textAlign: "center" }}>Here are the languages that can be played:</h2>
       <VStack spacing={4}>

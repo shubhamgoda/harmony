@@ -2,14 +2,14 @@ import { Heading, Spinner, VStack } from "@chakra-ui/react"
 import { collection, onSnapshot, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import Layout from "../components/layout/Layout"
-import SongHeading from "../components/top-songs/TopSongs"
+import SongHeading from "../components/favorite-songs/FavoriteSongs"
 import { db } from "../util/firebase"
 import { Song, SongWithId } from "../types"
-import SongList from "../components/top-songs/SongList"
+import SongList from "../components/favorite-songs/SongList"
 
 const songQuery = query(collection(db, 'songs'));
 
-const TopSongs = () => {
+const FavoriteSongs = () => {
   const [songs, setSongs] = useState<SongWithId[] | null>(null)
 
   useEffect(() => {
@@ -22,9 +22,9 @@ const TopSongs = () => {
   }, [])
 
   return (
-    <Layout title="Top Songs">
-      <h1 style={{ textAlign: "center" }}>Top Songs</h1>
-      <h2 style={{ textAlign: "center" }}>Here are your most played songs:</h2>
+    <Layout title="Favorite Songs">
+      <h1 style={{ textAlign: "center" }}>Favorite Songs</h1>
+      <h2 style={{ textAlign: "center" }}>Here are your favorite songs:</h2>
       <VStack spacing={4}>
         {songs ? <SongList songs={songs} /> : <Spinner />}
       </VStack>
@@ -32,4 +32,4 @@ const TopSongs = () => {
   )
 }
 
-export default TopSongs
+export default FavoriteSongs

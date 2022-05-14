@@ -15,8 +15,8 @@ const navData: NavLinkData[] = [
     path: "/",
   },
   {
-    name: "Top Songs",
-    path: "/top-songs",
+    name: "Favorite Songs",
+    path: "/favorite-songs",
   },
   {
     name: "Languages & Genres",

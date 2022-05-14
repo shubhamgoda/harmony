@@ -7,7 +7,7 @@ const SongHeading = () => (
     bgClip="text"
     lineHeight={1.33}
   >
-    Top Songs
+    Favorite Songs
   </Heading>
 )
 
