@@ -21,7 +21,7 @@ const LanguagesGenres = () => {
   }, [])
 
   return (
-    <Layout title="Favorite Songs">
+    <Layout title="Languages">
       <br></br>
       <h1 style={{ textAlign: "center" }}>Languages</h1>
       <h2 style={{ textAlign: "center" }}>Here are the languages that can be played:</h2>
